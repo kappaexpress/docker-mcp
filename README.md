@@ -1,6 +1,12 @@
 # docker imageビルドコマンド
 ```
-docker build -f ./Dockerfile_playwright -t playwright-mcp .
+cd playwright
+docker build -t playwright-mcp .
+```
+
+```
+cd google-search
+docker build -t google-search-mcp .
 ```
 
 # WindowsでのClaude Desktopでのmcpの設定
@@ -12,6 +18,23 @@ docker build -f ./Dockerfile_playwright -t playwright-mcp .
     "playwright": {
       "command": "docker",
       "args": ["run", "-i", "--rm", "playwright-mcp"]
+    },
+    "googlesearch": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GOOGLE_SEARCH_ENGINE_ID",
+        "-e",
+        "GOOGLE_API_KEY",
+        "google-search-mcp"
+      ],
+      "env": {
+        "GOOGLE_SEARCH_ENGINE_ID": "XXXXXXXXXXXXXXXX",
+        "GOOGLE_API_KEY": "XXXXXXXXXXXXXX"
+      }
     }
   }
 }
